@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uda-users
+  labels:
+    app: uda-users
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: uda-users
+  template:
+    metadata:
+      labels:
+        app: uda-users
+    spec:
+      containers:
+      - name: refactor-udagram-api-users
+        image: mvrkrishna/refactor-udagram-api-users
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
