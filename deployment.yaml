@@ -5,7 +5,7 @@ metadata:
   labels:
     app: uda-users
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: uda-users
@@ -17,6 +17,11 @@ spec:
       containers:
       - name: refactor-udagram-api-users
         image: mvrkrishna/refactor-udagram-api-users
+        resources:
+          limits:
+            cpu: "1.5"
+          requests:
+            cpu: "500m"
         ports:
         - containerPort: 8080
         livenessProbe:
